@@ -146,6 +146,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-webpack学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/06/webpack学习笔记/">webpack学习</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/06/webpack学习笔记/" class="archive-article-date">
+  	<time datetime="2017-06-06T02:52:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>webpack是一个模块加载器，支持AMD和CMD加载规范，跟之前使用的grunt、gulp等有较大的区别，grunt和gulp是工具，而webpack是模块化方案，具体的比较可以参考知乎上这个问答：<a href="https://www.zhihu.com/question/37020798" target="_blank" rel="external">Webpack、Browserify和Gulp三者之间到底是怎样的关系？</a></p>
+<h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><p>首先确保机器上装了node环境，这里不作具体讨论。<br>全局安装webpack，执行如下命令：</p>
+<pre><code>$ npm install webpack -g  
+</code></pre><p>我们也可以将webpack通过依赖项的方式装入项目中，该方式将会把webpack写入入口文件package.json中的devDependencies，执行以下命令：</p>
+<pre><code>$ npm install webpack --save-dev
+</code></pre><h3 id="2、小试牛刀"><a href="#2、小试牛刀" class="headerlink" title="2、小试牛刀"></a>2、小试牛刀</h3><p>我们先来看一下几个基于webpack命令行参数的打包例子，假设新建了如下的目录结构：</p>
+<pre><code>webpack-demo
+  |— a.js
+  |— b.js
+  |- index.html
+</code></pre><p>看一下各文件下的内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//a.js</div><div class="line">var animals = [&apos;cat&apos;, &apos;dog&apos;, &apos;fox&apos;];</div><div class="line">module.exports = animals;</div><div class="line">//b.js</div><div class="line">var animals = require(&apos;./a.js&apos;);</div><div class="line">console.log(animals);</div></pre></td></tr></table></figure></p>
+<p>执行下webpack命令：</p>
+<pre><code>$ webpack ./b.js bundle.js
+</code></pre><p>bundle.js文件将会生成到根目录中</p>
+<pre><code>webpack-demo
+  |— a.js
+  |— b.js
+  |- bundle.js
+  |- index.html
+</code></pre><p>命令行执行：</p>
+<pre><code>$ node bundle.js
+[&apos;cat&apos;, &apos;dog&apos;, &apos;fox&apos;]
+</code></pre><p>可以看到已经把console的内容输出出来了，打包的文件能在node环境下执行，同时也适用于浏览器环境，我们把bundle加入到根目录的index文件中，在chrome下打开控制台：<br><img src="/images/webpack_study_01.png" alt="输出内容"><br>跟在node环境下输出的内容一样</p>
+<h3 id="3、命令行"><a href="#3、命令行" class="headerlink" title="3、命令行"></a>3、命令行</h3><p>之前尝试了用命令行进行简单打包，语法 webpack &lt;entry&gt; &lt;output&gt;，enrty为打包的入口文件，output为打包后的文件路径。<br>其实webpack还提供了许多参数供我们自定义打包：</p>
+<ul>
+<li><code>-p</code>，对打包后的代码进行压缩</li>
+<li><code>--watch</code>，文件发生变化时，重新打包</li>
+<li><code>--config</code>，指定webpack打包配置文件，默认为webpack.config.js</li>
+<li><code>--progress</code>,显示打包过程</li>
+</ul>
+<h3 id="4、配置文件"><a href="#4、配置文件" class="headerlink" title="4、配置文件"></a>4、配置文件</h3><p>我们可以在命令行下对webpack做各种操作，而实际的开发环境下我们是不可能用命令行输入一大长串的字符,webpack给我们提供了一个文件 webpack.config.js ，我们只要在命令行里输入webpack就可以了，当然我们也可以配置我们命名的文件：</p>
+<pre><code>$ webpack -config webpack.config.example.js
+</code></pre><p>这时webpack执行的时候会去找根目录的 webpack.config.example.js 文件</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/06/webpack学习笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-ie浏览器下对于css文件大小的限制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -183,15 +278,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ie相关问题</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工作</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
         		</li>
       		
 		</ul>
@@ -202,57 +297,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/28/ie浏览器下对于css文件大小的限制/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/11/hello-world/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">说明</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/11/hello-world/">展开全文 >></a>
         </p>
       
 
@@ -359,6 +403,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ie相关问题</a>
               </li>
              
@@ -367,7 +415,11 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">学习</a>
               </li>
             
             <div class="clearfix"></div>
